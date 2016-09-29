@@ -1,6 +1,6 @@
 import java.lang.Math;
 
-public class robot {
+public class Robot {
 	
 	//Fields:
 	private String name;
@@ -10,7 +10,7 @@ public class robot {
 	private String orientation;
 	
 	//Constructor:
-	public robot(String name, int xPos, int yPos, int speed, String orientation) {
+	public Robot(String name, int xPos, int yPos, int speed, String orientation) {
 		this.name = name;
 		this.xPos = xPos;
 		this.yPos = yPos;
@@ -84,7 +84,7 @@ public class robot {
 	}
 	
 //	Our Robot can determine how far away it is from another Robot object.
-	public double howFar(robot otherRobot) {
+	public double howFar(Robot otherRobot) {
 		int xDist = this.getXPos() - otherRobot.getXPos();
 		int yDist = this.getYPos() - otherRobot.getYPos();
 		double distance = Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
@@ -98,14 +98,16 @@ public class robot {
 
 //	Use this information to design your Robot class. Once you are satisfied with your design, you should implement it and create a simple main method to test your robot's functionality.
 	public static void main(String args[]) {
-		robot myRobot = new robot("Henry", 7, 12, 2, "N");
+		Robot myRobot = new Robot("Henry", 7, 12, 2, "N");
 		System.out.println(myRobot);
 		myRobot.rotate();
-		System.out.println(myRobot);
 		myRobot.move();
 		System.out.println(myRobot);
-		robot yourRobot = new robot("Carlos", 12, 9, 4, "E");
+		Robot yourRobot = new Robot("Carlos", 12, 9, 4, "E");
 		System.out.println(yourRobot);
-		System.out.println(myRobot.howFar(yourRobot));
+		yourRobot.rotate();
+		yourRobot.move();
+		System.out.println(yourRobot);
+		System.out.println("Distance between robots: " + myRobot.howFar(yourRobot));
 	}
 }
