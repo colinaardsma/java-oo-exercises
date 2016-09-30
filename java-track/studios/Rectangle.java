@@ -41,11 +41,11 @@ public class Rectangle {
 		return "The rectangles are equal";
 	}
 	
-	public Integer addWidth(Integer w) {
+	public void addWidth(Integer w) {
 		this.width += w;
 	}
 	
-	public Integer addHeight(Integer h) {
+	public void addHeight(Integer h) {
 		this.height += h;
 	}
 
