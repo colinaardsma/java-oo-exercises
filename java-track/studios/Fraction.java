@@ -58,7 +58,6 @@ public class Fraction {
 		Fraction fractionTwo = new Fraction(12, 21);
 		System.out.println(fractionOne.add(fractionTwo));
 		System.out.println(fractionTwo.simplify());
-
 	}
 
 }
