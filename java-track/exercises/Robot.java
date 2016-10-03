@@ -68,19 +68,46 @@ public class Robot {
 		}
 		return "Position is now: " + this.xPos + ", " + this.yPos;
 	}
+
+	public String moveUser(int dist) {
+		switch(this.orientation) {
+		case "N":
+			this.yPos += dist;
+			break;
+		case "E":
+			this.xPos += dist;
+			break;
+		case "S":
+			this.yPos -= dist;
+			break;
+		case "W":
+			this.xPos -= dist;
+			break;
+		default:
+			break;
+		}
+		return "Position is now: " + this.xPos + ", " + this.yPos;
+	}
 	
 //	It can rotate. This changes the robot's orientation. Each rotation should be exactly 90 degrees to the left or the right.
-	public String rotate() {
-		if (this.orientation == "N") {
+	public void rotate() {
+		switch(this.orientation) {
+		case "N":
 			this.orientation = "E";
-		} else if (this.orientation == "E") {
+			break;
+		case "E":
 			this.orientation = "S";
-		} else if (this.orientation == "S") {
+			break;
+		case "S":
 			this.orientation = "W";
-		} else {
+			break;
+		case "W":
 			this.orientation = "N";
+			break;
+		default:
+			this.orientation = "ERROR";
+			break;
 		}
-		return "Orientation is now: " + this.orientation;
 	}
 	
 //	Our Robot can determine how far away it is from another Robot object.

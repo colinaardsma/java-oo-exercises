@@ -21,6 +21,13 @@ public class RobotTest {
 	}
 
 	@Test
+	public void moveUserTest() {
+		Robot r = new Robot("test", 5, 5, 5, "N");
+
+		assertEquals("Does not set position to correct cordinates", "Position is now: 5, 10", r.moveUser(5));
+	}
+	
+	@Test
 	public void howFarTest() {
 		Robot r = new Robot("test", 5, 5, 5, "N");
 		Robot r2 = new Robot("test", 10, 10, 10, "S");
