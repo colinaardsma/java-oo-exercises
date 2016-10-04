@@ -59,18 +59,16 @@ public class Student {
 	}
 	
 	public double computeTuition() {
-		double costPerCredit = Math.round((20000.0 / 15.0) * 100.0) / 100.0;
-		if(this.credits % 15 == 0) {
-			this.tuition = this.credits * costPerCredit;
-			this.tuition = Math.round(this.tuition * 100.0) / 100.0;
-		} else { //this doesnt work
-			double semesters = this.credits / 15.0;
-			this.tuition += semesters * costPerCredit;
-			double remainder = this.credits - semesters;
-			this.tuition += remainder * costPerCredit;
-			this.tuition = Math.round(this.tuition * 100.0) / 100.0;
-		}
-//		this.tuition = Math.round((this.credits * costPerCredit) * 100.0) / 100.0;
+		double costPerCredit = Math.round((20000.0 / 15.0) * 100.0) / 100.0; //1333.33
+		
+		//calculate full semesters and their cost
+		int semesters = this.credits / 15;
+		this.tuition = 20000.0 * semesters;
+
+		//calculate partial semesters and their cost
+		int partialSemester = (this.credits % 15);
+		this.tuition += costPerCredit * partialSemester;
+
 		return this.tuition;
 	}
 	
