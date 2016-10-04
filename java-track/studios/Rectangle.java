@@ -48,6 +48,10 @@ public class Rectangle {
 	public void addHeight(Integer h) {
 		this.height += h;
 	}
+	
+	public String toString(){
+		return "Your width is " + this.width + ", your height is " + this.height;
+	}
 
 	public static void main(String[] args) {
 		Rectangle myRect = new Rectangle(9, 9);
