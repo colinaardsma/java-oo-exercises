@@ -21,7 +21,7 @@ public class Student {
 	}
 
 	public int getCredits() {
-		return credits;
+		return credits;//
 	}
 
 	public void setCredits(int credits) {
