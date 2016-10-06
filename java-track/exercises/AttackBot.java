@@ -39,7 +39,7 @@ public class AttackBot extends Robot{
 		return this.defense;
 	}
 	
-	public int attack(AttackBot atb) {
+	public int attackStatic(AttackBot atb) {
 		int damage = 0;
 		if (atb.getDefense() < this.strength) {
 			damage = this.strength - atb.getDefense();
@@ -47,7 +47,7 @@ public class AttackBot extends Robot{
 		return damage;
 	}
 	
-	public int attackRandom(AttackBot atb) {
+	public int attack(AttackBot atb) {
 		int damage = 0;
 		int strengthRoll = (int) (Math.random() * this.strength);
 		int defenseRoll = (int) (Math.random() * atb.getDefense());
