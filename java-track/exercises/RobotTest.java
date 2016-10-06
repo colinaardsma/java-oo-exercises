@@ -62,5 +62,22 @@ public class RobotTest {
 		assertEquals("One round of fighting is not calculated properly", "Fighter 3: 96 / Fighter 2: 93", atb3.fight(atb2));
 		assertEquals("Can't have negative damage", 0, atb4.attack(atb5));
 	}
+
+	@Test
+	public void attackTestRandom() {
+		AttackBot atb = new AttackBot("Fighter 1", 5, 12, 3, "N", 100, 12, 4, "Axe");
+		AttackBot atb2 = new AttackBot("Fighter 2", 8, 11, 5, "N", 100, 6, 9, "Spear");
+		AttackBot atb3 = new AttackBot("Fighter 3", 8, 11, 5, "N", 100, 16, 2, "Sword");
+		AttackBot atb4 = new AttackBot("Fighter 4", 8, 11, 5, "N", 100, 1, 1, "Unarmed");
+		AttackBot atb5 = new AttackBot("Fighter 5", 8, 11, 5, "N", 100, 25, 10, "Gun");
+
+
+		assertEquals("Damage is not calculated properly", 3, atb.attackRandom(atb2), atb.getStrength());
+		atb.defend(7);
+		assertEquals("Defense value is not calculated properly", 93, atb.getHealth(), 0.0);
+		assertEquals("One round of fighting is not calculated properly", "Fighter 3: 96 / Fighter 2: 93", atb3.fight(atb2));
+		assertEquals("Can't have negative damage", 0, atb4.attackRandom(atb5));
+	}
+
 	
 }

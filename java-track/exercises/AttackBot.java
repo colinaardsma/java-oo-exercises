@@ -1,3 +1,4 @@
+import java.lang.Math;
 
 public class AttackBot extends Robot{
 	
@@ -46,6 +47,16 @@ public class AttackBot extends Robot{
 		return damage;
 	}
 	
+	public int attackRandom(AttackBot atb) {
+		int damage = 0;
+		int strengthRoll = (int) (Math.random() * this.strength);
+		int defenseRoll = (int) (Math.random() * atb.getDefense());
+		if (defenseRoll < strengthRoll) {
+			damage = strengthRoll - defenseRoll;
+		}
+		return damage;
+	}
+		
 	public void defend(int damage) {
 		this.health -= damage;
 	}
@@ -60,11 +71,11 @@ public class AttackBot extends Robot{
 		AttackBot atb = new AttackBot("Fighter 1", 5, 12, 3, "N", 100, 12, 4, "Axe");
 		AttackBot atb2 = new AttackBot("Fighter 2", 8, 11, 5, "N", 100, 6, 9, "Spear");
 
-		System.out.println(atb.fight(atb2));
-		System.out.println(atb.fight(atb2));
-		System.out.println(atb.fight(atb2));
-		System.out.println(atb.fight(atb2));
-		System.out.println(atb.fight(atb2));
+		System.out.println(atb.attackRandom(atb2));
+		System.out.println(atb.attackRandom(atb2));
+		System.out.println(atb.attackRandom(atb2));
+		System.out.println(atb.attackRandom(atb2));
+		System.out.println(atb.attackRandom(atb2));
 
 	}
 
