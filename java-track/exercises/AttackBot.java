@@ -3,17 +3,19 @@ public class AttackBot extends Robot{
 	
 	private int health;
 	private int strength;
+	private int defense;
 	private String weapon;
 
-	public AttackBot(String name, int xPos, int yPos, int speed, String orientation, int health, int strength, String weapon) {
+	public AttackBot(String name, int xPos, int yPos, int speed, String orientation, int health, int strength, int defense, String weapon) {
 		super(name, xPos, yPos, speed, orientation);
 		this.health = health;
 		this.strength = strength;
+		this.defense = defense;
 		this.weapon = weapon;
 	}
 
 	public int getStrength() {
-		return strength;
+		return this.strength;
 	}
 
 	public void setStrength(int strength) {
@@ -21,7 +23,7 @@ public class AttackBot extends Robot{
 	}
 
 	public String getWeapon() {
-		return weapon;
+		return this.weapon;
 	}
 
 	public void setWeapon(String weapon) {
@@ -29,11 +31,40 @@ public class AttackBot extends Robot{
 	}
 
 	public int getHealth() {
-		return health;
+		return this.health;
+	}
+	
+	public int getDefense() {
+		return this.defense;
+	}
+	
+	public int attack(AttackBot atb) {
+		int damage = 0;
+		if (atb.getDefense() < this.strength) {
+			damage = this.strength - atb.getDefense();
+		}
+		return damage;
+	}
+	
+	public void defend(int damage) {
+		this.health -= damage;
+	}
+	
+	public String fight(AttackBot atb) {
+		atb.defend(this.attack(atb));
+		this.defend(atb.attack(this));
+		return this.name + ": " + this.health + " / " + atb.name + ": " + atb.getHealth();
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		AttackBot atb = new AttackBot("Fighter 1", 5, 12, 3, "N", 100, 12, 4, "Axe");
+		AttackBot atb2 = new AttackBot("Fighter 2", 8, 11, 5, "N", 100, 6, 9, "Spear");
+
+		System.out.println(atb.fight(atb2));
+		System.out.println(atb.fight(atb2));
+		System.out.println(atb.fight(atb2));
+		System.out.println(atb.fight(atb2));
+		System.out.println(atb.fight(atb2));
 
 	}
 
