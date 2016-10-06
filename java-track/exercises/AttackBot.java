@@ -71,11 +71,6 @@ public class AttackBot extends Robot{
 		AttackBot atb = new AttackBot("Fighter 1", 5, 12, 3, "N", 100, 12, 4, "Axe");
 		AttackBot atb2 = new AttackBot("Fighter 2", 8, 11, 5, "N", 100, 6, 9, "Spear");
 
-		System.out.println(atb.attackRandom(atb2));
-		System.out.println(atb.attackRandom(atb2));
-		System.out.println(atb.attackRandom(atb2));
-		System.out.println(atb.attackRandom(atb2));
-		System.out.println(atb.attackRandom(atb2));
 
 	}
 
