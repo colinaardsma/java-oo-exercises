@@ -3,11 +3,11 @@ import java.lang.Math;
 public class Robot {
 	
 	//Fields:
-	private String name;
-	private int xPos;
-	private int yPos;
-	private int speed;
-	private String orientation;
+	protected String name;
+	protected int xPos;
+	protected int yPos;
+	protected int speed;
+	protected String orientation;
 	
 	//Constructor:
 	public Robot(String name, int xPos, int yPos, int speed, String orientation) {
