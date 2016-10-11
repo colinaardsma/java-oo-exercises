@@ -57,14 +57,21 @@ public class Robot {
 	//Modifiers:
 //	It can move. Where it ends up depends on its current position, its orientation, and its speed.
 	public String move() {
-		if (this.orientation == "N") {
+		switch(this.orientation) {
+		case "N":
 			this.yPos += this.speed;
-		} else if (this.orientation == "E") {
+			break;
+		case "E":
 			this.xPos += this.speed;
-		} else if (this.orientation == "S") {
-			this.yPos -= speed;
-		} else {
-			this.xPos -= speed;
+			break;
+		case "S":
+			this.yPos -= this.speed;
+			break;
+		case "W":
+			this.xPos -= this.speed;
+			break;
+		default:
+			break;
 		}
 		return "Position is now: " + this.xPos + ", " + this.yPos;
 	}
