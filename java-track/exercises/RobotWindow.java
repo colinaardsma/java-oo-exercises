@@ -193,16 +193,16 @@ public class RobotWindow {
 		listModel = new DefaultListModel<Robot>();
 		
  		list = new JList<>(listModel);
+ 		//problem in here somewhere
  		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
- 		for (int i = 0; i < listModel.size(); i++) {
- 			Robot r = listModel.get(list.getSelectedIndices()[i]);
- 			list.addListSelectionListener(new ListSelectionListener() {
+ 		Object[] r = list.getSelectedValuesList().toArray();
+ 		list.addListSelectionListener(new ListSelectionListener() {
  			public void valueChanged(ListSelectionEvent e) {
- 				r1 = listModel.get(list.getSelectedIndices()[e.getFirstIndex()]);
- 				r2 = listModel.get(list.getSelectedIndices()[e.getLastIndex()]);
- 			}
+ 				r1 = (Robot) r[1];
+ 				r2 = (Robot) r[2];
  			}
  		});
+ 		
 		springLayout.putConstraint(SpringLayout.NORTH, list, -60, SpringLayout.SOUTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, list, 10, SpringLayout.WEST, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, list, -10, SpringLayout.SOUTH, frame.getContentPane());
