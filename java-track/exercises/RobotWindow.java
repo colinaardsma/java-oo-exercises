@@ -41,9 +41,9 @@ public class RobotWindow {
 	private DefaultListModel<Robot> listModel;
 	private JTextField txtMove;
 	private JLabel lblDistance;
-	private double dist;
-	private Robot r1;
-	private Robot r2;
+	public double dist;
+	public Robot r1;
+	public Robot r2;
 
 
 	/**
@@ -118,7 +118,7 @@ public class RobotWindow {
 		frame.getContentPane().add(btnRotate);
 		
 		dist = 1234.0;
-		
+
 		JButton btnDistanceToOther = new JButton("distance to other robot");
 		btnDistanceToOther.addMouseListener(new MouseAdapter() {
 			@Override
@@ -194,14 +194,12 @@ public class RobotWindow {
 		
  		list = new JList<>(listModel);
  		//problem in here somewhere
- 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
- 		Object[] r = list.getSelectedValuesList().toArray();
- 		list.addListSelectionListener(new ListSelectionListener() {
- 			public void valueChanged(ListSelectionEvent e) {
- 				r1 = (Robot) r[1];
- 				r2 = (Robot) r[2];
- 			}
- 		});
+ 		
+ 		list.setSelectedIndices(new int[]{0,1});
+ 		if (list.getModel().getSize() == 2) {
+ 			r1 = (Robot) list.getSelectedValuesList().toArray()[0];
+ 			r2 = (Robot) list.getSelectedValuesList().toArray()[1];
+ 		}
  		
 		springLayout.putConstraint(SpringLayout.NORTH, list, -60, SpringLayout.SOUTH, frame.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, list, 10, SpringLayout.WEST, frame.getContentPane());
