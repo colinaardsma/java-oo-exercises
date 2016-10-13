@@ -38,10 +38,21 @@ public class AggresiveAttackRobot extends AttackBot implements RobotBehavior {
 	public static void main (String[] args) {
 		AggresiveAttackRobot ar = new AggresiveAttackRobot("carl", 7, 11, 3, "N", 100, 13, 2, "taco");
 		DefensiveAttackRobot dr = new DefensiveAttackRobot("lola", 18, 22, 5, "W", 100, 4, 10, "mustard");
-		System.out.println(dr.doNextMove(ar)); //dr will not attack since overall distance is greater than 5.0
-		System.out.println(ar.doNextMove(dr)); //ar will move to 3.0 away (or less) on the X and Y and attack
-		System.out.println(dr.doNextMove(ar)); //dr will attack since overall distance is less than 5.0
-
+//		System.out.println(dr.doNextMove(ar)); //dr will not attack since overall distance is greater than 5.0
+//		System.out.println(ar.doNextMove(dr)); //ar will move to 3.0 away (or less) on the X and Y and attack
+//		System.out.println(dr.doNextMove(ar)); //dr will attack since overall distance is less than 5.0
+		while(ar.getHealth() > 0 && dr.getHealth() > 0) {
+			System.out.println(ar.doNextMove(dr));
+			System.out.println(dr.doNextMove(ar));
+			System.out.println(ar);
+			System.out.println(dr);
+			if (ar.getHealth() <= 0) {
+				System.out.println("Defense Robot Wins!");
+			} else if (dr.getHealth() <= 0) {
+				System.out.println("Attack Robot Wins!");
+			}
+		}
+	}
 
 	}
 }
