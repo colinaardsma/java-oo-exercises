@@ -6,11 +6,11 @@ public class DefensiveAttackRobot extends AttackBot implements RobotBehavior {
 	}
 
 	@Override
-	public int doNextMove(AttackBot r) {
+	public String doNextMove(AttackBot r) {
 		if (this.howFar(r) < 5.0) { //if overall distance between robots is greater than 5.0 then do nothing
-			return this.attack(r);
+			return this.fight(r);
 		}
-		return 0;
+		return "";
 	}
 
 }

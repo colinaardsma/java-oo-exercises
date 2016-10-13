@@ -1,5 +1,5 @@
 
 public interface RobotBehavior {
 
-	public int doNextMove(AttackBot r);
+	public String doNextMove(AttackBot r);
 }
