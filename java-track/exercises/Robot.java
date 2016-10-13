@@ -15,6 +15,10 @@ public class Robot {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.speed = speed;
+		
+		if (orientation != "N" && orientation != "S" && orientation != "E" && orientation != "W" && orientation != "n" && orientation != "s" && orientation != "e" && orientation != "w") {
+			throw new IllegalArgumentException();
+		}
 		this.orientation = orientation.toUpperCase();
 	}
 	
@@ -45,13 +49,11 @@ public class Robot {
 	
 	//Setters:
 	public String setOrientation(String orientation) {
-		orientation = orientation.toUpperCase();
-		if (orientation != "N" && orientation != "S" && orientation != "E" && orientation != "W")
-			return "Orientation must be 'N, S, E, W'";
-		else {
-			this.orientation = orientation;
-			return "Orientation is now " + this.orientation;
+		if (orientation != "N" && orientation != "S" && orientation != "E" && orientation != "W" && orientation != "n" && orientation != "s" && orientation != "e" && orientation != "w") {
+			throw new IllegalArgumentException();
 		}
+		this.orientation = orientation.toUpperCase();
+		return "Orientation is now " + this.orientation;
 	}
 
 	//Modifiers:
@@ -132,16 +134,22 @@ public class Robot {
 
 //	Use this information to design your Robot class. Once you are satisfied with your design, you should implement it and create a simple main method to test your robot's functionality.
 	public static void main(String args[]) {
-		Robot myRobot = new Robot("Henry", 7, 12, 2, "N");
-		System.out.println(myRobot);
-		myRobot.rotate();
-		myRobot.move();
-		System.out.println(myRobot);
-		Robot yourRobot = new Robot("Carlos", 12, 9, 4, "E");
-		System.out.println(yourRobot);
-		yourRobot.rotate();
-		yourRobot.move();
-		System.out.println(yourRobot);
-		System.out.println("Distance between robots: " + myRobot.howFar(yourRobot));
+		try {
+			Robot myRobot = new Robot("Henry", 7, 12, 2, "s");
+			System.out.println(myRobot);
+			myRobot.rotate();
+			myRobot.move();
+			System.out.println(myRobot);
+			Robot yourRobot = new Robot("Carlos", 12, 9, 4, "E");
+			System.out.println(yourRobot);
+			yourRobot.rotate();
+			yourRobot.move();
+			System.out.println(yourRobot);
+			System.out.println("Distance between robots: " + myRobot.howFar(yourRobot));
+		}
+		catch(IllegalArgumentException e) {
+			System.out.println("Cannot create robot");
+			e.printStackTrace();
+		}
 	}
 }

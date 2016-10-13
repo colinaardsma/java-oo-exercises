@@ -9,7 +9,14 @@ public class RobotTest {
 	public void setOrientationTest() {
 		Robot r = new Robot("test", 5, 5, 5, "N");
 
-		assertEquals("Does not correct user input to N/S/E/W", "Orientation must be 'N, S, E, W'", r.setOrientation("T"));
+		try {
+			r.setOrientation("t");
+			fail("Invalid entry was not caught");
+		}
+		catch (IllegalArgumentException e) {
+			assertTrue(true);
+		}
+		
 		assertEquals("Does not set orientation to newly entered value", "Orientation is now N", r.setOrientation("N"));
 	}
 
@@ -79,5 +86,14 @@ public class RobotTest {
 		assertEquals("Can't have negative damage", 0, atb4.attackRandom(atb5));
 	}
 
-	
+	@Test
+	public void TestBadOrientation() {
+		try {
+			Robot myRobot = new Robot("Henry", 7, 12, 2, "f");
+			fail("Invalid entry was not caught");
+		}
+		catch (IllegalArgumentException e) {
+			assertTrue(true);
+		}
+	}
 }
