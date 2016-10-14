@@ -90,8 +90,8 @@ public class AttackBot extends Robot{
 			AttackBot dr2 = dr.setBehavior(3);
 			System.out.println("test");
 			while(ar2.getHealth() > 0 && dr2.getHealth() > 0) {
-				System.out.println(ar2.doNextMove(dr2));
-				System.out.println(dr2.doNextMove(ar2));
+//				System.out.println(ar2.doNextMove(dr2));
+//				System.out.println(dr2.doNextMove(ar2));
 //				System.out.println(ar2);
 //				System.out.println(dr2);
 				if (ar2.health <= 0) {

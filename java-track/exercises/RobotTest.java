@@ -90,6 +90,7 @@ public class RobotTest {
 	public void TestBadOrientation() {
 		try {
 			Robot myRobot = new Robot("Henry", 7, 12, 2, "f");
+			myRobot.getName();
 			fail("Invalid entry was not caught");
 		}
 		catch (IllegalArgumentException e) {

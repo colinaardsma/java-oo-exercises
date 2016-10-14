@@ -6,7 +6,7 @@ public class AggresiveAttackRobot extends AttackBot implements RobotBehavior {
 	}
 
 	@Override
-	public String doNextMove(AttackBot r) {
+	public void doNextMove(AttackBot r) {
 		if (this.howFar(r) > 3.0) {
 			if (r.getXPos() > this.getXPos()) { //if X distance between robots is greater than 3.0 then move closer
 				while (this.getOrientation() != "E") {
@@ -31,7 +31,7 @@ public class AggresiveAttackRobot extends AttackBot implements RobotBehavior {
 				this.moveUser(this.getYPos() - r.getYPos() - 3);
 			}
 		}
-		return this.fight(r);
+		this.fight(r);
 	}
 
 
@@ -42,8 +42,10 @@ public class AggresiveAttackRobot extends AttackBot implements RobotBehavior {
 //		System.out.println(ar.doNextMove(dr)); //ar will move to 3.0 away (or less) on the X and Y and attack
 //		System.out.println(dr.doNextMove(ar)); //dr will attack since overall distance is less than 5.0
 		while(ar.getHealth() > 0 && dr.getHealth() > 0) {
-			System.out.println(ar.doNextMove(dr));
-			System.out.println(dr.doNextMove(ar));
+			ar.doNextMove(dr);
+			dr.doNextMove(ar);
+			System.out.println("ar: " + ar.getHealth());
+			System.out.println("dr: " + dr.getHealth());
 			if (ar.getHealth() <= 0) {
 				System.out.println("Defense Robot Wins!");
 			} else if (dr.getHealth() <= 0) {
