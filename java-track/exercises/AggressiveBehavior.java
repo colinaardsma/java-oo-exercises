@@ -1,32 +1,38 @@
 
 public class AggressiveBehavior implements RobotBehavior{
 
-	public void doNextMove(AttackBot r) {
-		if (this.howFar(r) > 3.0) {
-			if (r.getXPos() > this.getXPos()) { //if X distance between robots is greater than 3.0 then move closer
-				while (this.getOrientation() != "E") {
-					this.rotate();
+	private int aggression;
+	
+	public AggressiveBehavior(int aggression) {
+		this.aggression = aggression;
+	}
+	
+	public void doNextMove(AttackBot attacker, AttackBot defender) {
+		if (attacker.howFar(defender) > 3.0) {
+			if (defender.getXPos() > attacker.getXPos()) { //if X distance between robots is greater than 3.0 then move closer
+				while (attacker.getOrientation() != "E") {
+					attacker.rotate();
 				}
-				this.moveUser(r.getXPos() - this.getXPos() - 3);
-			} else if (r.getXPos() < this.getXPos()) {
-				while (this.getOrientation() != "W") {
-					this.rotate();
+				attacker.moveUser(defender.getXPos() - attacker.getXPos() - 3);
+			} else if (defender.getXPos() < attacker.getXPos()) {
+				while (attacker.getOrientation() != "W") {
+					attacker.rotate();
 				}
-				this.moveUser(this.getXPos() - r.getXPos() - 3);
+				attacker.moveUser(attacker.getXPos() - defender.getXPos() - 3);
 			}
-			if (r.getYPos() > this.getYPos()) { //if Y distance between robots is greater than 3.0 then move closer
-				while (this.getOrientation() != "N") {
-					this.rotate();
+			if (defender.getYPos() > attacker.getYPos()) { //if Y distance between robots is greater than 3.0 then move closer
+				while (attacker.getOrientation() != "N") {
+					attacker.rotate();
 				}
-				this.moveUser(r.getYPos() - this.getYPos() - 3);
-			} else if (r.getYPos() < this.getYPos()) {
-				while (this.getOrientation() != "S") {
-					this.rotate();
+				attacker.moveUser(defender.getYPos() - attacker.getYPos() - 3);
+			} else if (defender.getYPos() < attacker.getYPos()) {
+				while (attacker.getOrientation() != "S") {
+					attacker.rotate();
 				}
-				this.moveUser(this.getYPos() - r.getYPos() - 3);
+				attacker.moveUser(attacker.getYPos() - defender.getYPos() - 3);
 			}
 		}
-		this.fight(r);
+		attacker.fight(defender);
 	}
 	
 }
