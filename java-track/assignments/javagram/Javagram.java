@@ -1,13 +1,13 @@
 package javagram;
 
 import javagram.filters.*;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Javagram {
-
+	
 	public static void main(String[] args) {
 
 		// Create the base path for images		
@@ -40,13 +40,21 @@ public class Javagram {
 		} while(picture == null);
 		
 		// TODO - prompt user for filter and validate input
-		System.out.println("Choose a filter:");
-		System.out.println("1. Blue Filter");
-		System.out.println("2. Other Filter");
-		int filterChoice = in.nextInt();
-		
-		// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
-		Filter filter = getFilter(filterChoice);			
+		Filter filter = null;
+		do {
+			try{
+				System.out.println("Choose a filter:");
+				System.out.println("1. Blue Filter");
+				System.out.println("2. Other Filter");
+				int filterChoice = in.nextInt();	
+				
+				// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
+				filter = getFilter(filterChoice);
+			} catch (NullPointerException e) {
+				System.out.println("Invalid selection. Please choose again.");
+			}
+		} while(filter == null);
+			
 		
 		// filter and display image
 		Picture processed = filter.process(picture);
