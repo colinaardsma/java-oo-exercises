@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import junit.framework.TestCase;
@@ -109,11 +111,16 @@ public class StudentAndCourseTest extends TestCase {
 			int c2 = (int)(Math.random() * 120 + 1);
 			double g2 = Math.round(Math.random() * 4000) / 1000.0;
 			ss.submitGrade(g2, c2);
-			Student bb = s.createLegacy(s, ss);
-			assertTrue("create baby not setting name properly", bb.getName().contains(s.getName()) && bb.getName().contains(ss.getName()));
-			assertEquals("create baby not setting gpa properly", (g + g2) / 2, bb.getGPA(), 0.01);
-			assertEquals("create baby not setting credits properly", bb.getCredits(), Math.max(c, c2));
-			assertTrue("create baby not creating ID properly", bb.getStudentID() == s.getStudentID() + ss.getStudentID());
+			Student.createLegacy(s, ss);
+//			Student bb = s.createLegacy(s, ss);
+			assertTrue("create baby not setting name properly", Student.createLegacy(s, ss).getName().contains(s.getName()) && Student.createLegacy(s, ss).getName().contains(ss.getName()));
+			assertEquals("create baby not setting gpa properly", (g + g2) / 2, Student.createLegacy(s, ss).getGPA(), 0.01);
+			assertEquals("create baby not setting credits properly", Student.createLegacy(s, ss).getCredits(), Math.max(c, c2));
+			assertTrue("create baby not creating ID properly", Student.createLegacy(s, ss).getStudentID() == s.getStudentID() + ss.getStudentID());
+//			assertTrue("create baby not setting name properly", bb.getName().contains(s.getName()) && bb.getName().contains(ss.getName()));
+//			assertEquals("create baby not setting gpa properly", (g + g2) / 2, bb.getGPA(), 0.01);
+//			assertEquals("create baby not setting credits properly", bb.getCredits(), Math.max(c, c2));
+//			assertTrue("create baby not creating ID properly", bb.getStudentID() == s.getStudentID() + ss.getStudentID());
 
 			//Make sure parents haven't changed
 			assertEquals("createBaby should not alter the parents", a + " " + b, s.getName());
@@ -225,6 +232,24 @@ public class StudentAndCourseTest extends TestCase {
 		}
 	}
 
-
+	@Test
+	public void testCourseGetAllCourses() {
+		ArrayList<Course> coursesTest = new ArrayList<Course>();
+		for (int i = 0; i < 100; i++) {
+			int a = (((int)(Math.random() * 26)) + 96) + 1;
+			int b = (((int)(Math.random() * 26)) + 96) + 1;
+			int c = (((int)(Math.random() * 26)) + 96) + 1;
+			String name = Character.toString((char)a) + Character.toString((char)b) + Character.toString((char)c);
+			
+			int credits = ((int)(Math.random() * 3)) + 1;
+			int seats = ((int)(Math.random() * 50)) + 1;
+			
+			Course course = new Course(name, credits, seats);
+			coursesTest.add(course);
+		}
+//		System.out.println(coursesTest);
+//		System.out.println(Course.getAllCourses());
+		assertTrue("Courses do not list properly.", Course.getAllCourses().equals(coursesTest));
+	}
 
 }

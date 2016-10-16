@@ -7,6 +7,7 @@ public class Course {
 	private int remainingSeats;
 	private Student[] roster;
 	private double avgGPA;
+	private static ArrayList<Course> allCourses	= new ArrayList<Course>();
 	
 	public Course(String name, int credits, int remainingSeats) {
 		this.name = name;
@@ -14,6 +15,7 @@ public class Course {
 		this.remainingSeats = remainingSeats;
 		this.roster = new Student[this.remainingSeats];
 		this.avgGPA = 0;
+		allCourses.add(this);
 	}
 	
 	public String getName() {
@@ -69,6 +71,10 @@ public class Course {
 		this.avgGPA = cumGPA / count;
 		return this.avgGPA;
 	}
+	
+	public static ArrayList<Course> getAllCourses() {
+		return allCourses;
+	}
 
 	public String toString() {
 		return this.name + " is worth " + this.credits + " credits and has " + this.remainingSeats + " seats remaining.";
@@ -77,7 +83,9 @@ public class Course {
 	public static void main(String[] args) {
 		Course c = new Course("test", 3, 15);
 		System.out.println(c.getRoster());
-
+		System.out.println(Course.getAllCourses());
+		Course d = new Course("test2", 6, 18);
+		System.out.println(Course.getAllCourses());
 	}
 
 }

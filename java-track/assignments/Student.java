@@ -79,7 +79,7 @@ public class Student {
 		this.gpa = Math.round((this.qScore / this.credits) * 1000.0) / 1000.0;
 	}
 	
-	public Student createLegacy(Student mother, Student father) {
+	public static Student createLegacy(Student mother, Student father) {
 		String fName = mother.getName();
 		String lName = father.getName();
 		int sID = mother.sID + father.sID;
