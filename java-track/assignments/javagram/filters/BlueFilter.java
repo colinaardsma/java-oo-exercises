@@ -22,8 +22,7 @@ public class BlueFilter implements Filter{
 	          
 	          int newBlue = (r + g + b) / 3;
 	          
-//	          processed.set(i, j, new Color(0, 0, newBlue)); //for some reason this isnt working
-	          processed.set(i, j, new Color(r, g, 255));	          
+	          processed.set(i, j, new Color(0, 0, newBlue));
 	    	  
 	      }
 	    }
