@@ -73,8 +73,10 @@ public class Javagram {
 		do {
 			try{
 				System.out.println("Choose a filter:");
-				System.out.println("1. Blue Filter");
-				System.out.println("2. Other Filter");
+				System.out.println("1. Red Filter");
+				System.out.println("2. Green Filter");
+				System.out.println("3. Blue Filter");
+
 				int filterChoice = in.nextInt();	
 				
 				// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
@@ -95,8 +97,12 @@ public class Javagram {
 		
 		// TODO - create some more filters, and add logic to return the appropriate one
 		if(i == 1) {
+			return new RedFilter();
+		} else if(i == 2) {
+			return new GreenFilter();
+		} else if(i == 3) {
 			return new BlueFilter();
-		}
+		} 
 		return null;
 	}
 
