@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class Javagram {
 	
+	private static Filter filter = null;
+	
 	public static void main(String[] args) {
 
 		// Create the base path for images		
@@ -39,22 +41,8 @@ public class Javagram {
 			
 		} while(picture == null);
 		
-		// TODO - prompt user for filter and validate input
-		Filter filter = null;
-		do {
-			try{
-				System.out.println("Choose a filter:");
-				System.out.println("1. Blue Filter");
-				System.out.println("2. Other Filter");
-				int filterChoice = in.nextInt();	
-				
-				// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
-				filter = getFilter(filterChoice);
-			} catch (NullPointerException e) {
-				System.out.println("Invalid selection. Please choose again.");
-			}
-		} while(filter == null);
-			
+		// TODO - prompt user for filter and validate input		
+		filter = displayFilterMenu(in);
 		
 		// filter and display image
 		Picture processed = filter.process(picture);
@@ -79,6 +67,26 @@ public class Javagram {
 		
 		// close input scanner
 		in.close();
+	}
+	
+	private static Filter displayFilterMenu(Scanner in) {
+		do {
+			try{
+				System.out.println("Choose a filter:");
+				System.out.println("1. Blue Filter");
+				System.out.println("2. Other Filter");
+				int filterChoice = in.nextInt();	
+				
+				// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
+				filter = getFilter(filterChoice);
+				if (filter == null) { 
+					throw new NullPointerException();
+				}
+			} catch (NullPointerException e) {
+				System.out.println("Invalid selection. Please choose again.");
+			}
+		} while(filter == null);
+		return filter;
 	}
 	
 	// TODO - refactor this method to accept an int parameter, and return an instance of the Filter interface
