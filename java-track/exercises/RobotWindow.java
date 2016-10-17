@@ -1,31 +1,14 @@
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JSplitPane;
-import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.SpringLayout;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JFormattedTextField;
-import javax.swing.JList;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import java.awt.List;
-import javax.swing.JTextArea;
-import javax.swing.JComboBox;
-import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 
 
 public class RobotWindow {
