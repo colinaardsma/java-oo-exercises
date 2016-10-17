@@ -2,7 +2,6 @@ package javagram;
 
 import javagram.filters.*;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -16,27 +15,27 @@ public class Javagram {
 	private static Picture processed = null;
 	private static String fileName = "";
 	private static String absFileName = "";
-	private static boolean fileExists = false;
 
 	public static void main(String[] args) {
 
 		in = new Scanner(System.in);
 
-		//get filename
+		// get filename
 		getFilename();
 		
-//		saveLoop();
+		// show filter list and get user input
+		applyFilter();
 		
 		boolean exitSwitch = false;
 		do {
-			saveUndoExitMenu();	// save/undo/exit prompt
+			saveUndoExitMenu();	// save/undo/exit prompt and get user input
 
 			switch (fileName) {
-			case "undo":
-				undoLoop();
+			case "undo": // undo filter choice (revert to original image)
+				applyFilter(); // apply filter
 				break;
 
-			case "exit":
+			case "exit": // exit
 				System.out.println("Image not saved");
 				in.close();	
 				System.exit(0);
@@ -44,28 +43,51 @@ public class Javagram {
 				break;
 
 			default:
-				while (!fileName.endsWith(".jpg") && !fileName.endsWith(".png")) {
-					System.out.println("Error: filename must end in .jpg or .png");
+				if (!fileName.endsWith(".jpg") && !fileName.endsWith(".png")) { // confirm file ends with .jpg or .png
+					System.out.println("Filename must end in .jpg or .png");
+					fileName = "";
+					break;
+				} else {
+					if (fileExists()) {
+						overwriteLoop(); // if file exists run overwrite loop (y, n, invalid input check)
+					} else { // save and exit
+						savePicture();
+						in.close();	
+						System.exit(0);
+						exitSwitch = true;
+						break;
+					}
 				}
-				break;
 			}
 		} while (!exitSwitch);
-		
-		undoLoop();
-		saveExitLoop();
-		fileExists();
-		overwriteLoop();	
-		
-		
-		System.out.println("out of loop");
+	}
 
-		//		} finally {
-		System.out.println("in finally");
-		// close input scanner
-		in.close();	
-		System.exit(0);
-		//		}
+	private static Picture getFilename() {
+		// Create the base path for images		
+		String relPath;
 
+		// prompt user for image to filter and validate input
+		do {
+
+			String imagePath = "path not set";
+
+			// try to open the file
+			try {
+
+				System.out.println("Image path (relative to " + dir + "):");
+				relPath = in.next();
+
+				String[] relPathParts = relPath.split(File.separator);
+				imagePath = dir + File.separator + String.join(File.separator, Arrays.asList(relPathParts));
+
+				picture = new Picture(imagePath);
+
+			} catch (RuntimeException e) {
+				System.out.println("Could not open image: " + imagePath);
+			}
+
+		} while(picture == null);
+		return picture;
 	}
 
 	private static Filter displayFilterMenu(Scanner in) {
@@ -111,34 +133,6 @@ public class Javagram {
 		return null;
 	}
 
-	private static Picture getFilename() {
-		// Create the base path for images		
-		String relPath;
-
-		// prompt user for image to filter and validate input
-		do {
-
-			String imagePath = "path not set";
-
-			// try to open the file
-			try {
-
-				System.out.println("Image path (relative to " + dir + "):");
-				relPath = in.next();
-
-				String[] relPathParts = relPath.split(File.separator);
-				imagePath = dir + File.separator + String.join(File.separator, Arrays.asList(relPathParts));
-
-				picture = new Picture(imagePath);
-
-			} catch (RuntimeException e) {
-				System.out.println("Could not open image: " + imagePath);
-			}
-
-		} while(picture == null);
-		return picture;
-	}
-
 	private static void applyFilter() {
 		// TODO - prompt user for filter and validate input		
 		filter = displayFilterMenu(in);
@@ -160,76 +154,46 @@ public class Javagram {
 		return fileName;
 	}
 	
-	private static void undoLoop() {
-		do {
-			applyFilter(); // apply filter
-			saveUndoExitMenu();	// save/undo/exit prompt
-		} while (fileName.equals("undo"));
-	}
-
-	private static void saveExitLoop() {
-		// TODO - if the user enters the same file name as the input file, confirm that they want to overwrite the original
-		if (fileName.equals("exit")) {
-			System.out.println("Image not saved");
-		} else {
-			while (!fileName.endsWith(".jpg") && !fileName.endsWith(".png")) {
-				System.out.println("Error: filename must end in .jpg or .png");
-				saveLoop();	// save/undo/exit prompt
-			}
-		}
-	}
-	
-	
-
-	private static void fileExists() {
+	private static boolean fileExists() {
 		File folder = new File(dir); // create file object of dir
 		File[] listOfFiles = folder.listFiles(); //create list of files in dir
 
 		for (File file : listOfFiles) { // loop through files
 			if (file.isFile()) { // confirm file is a file (not a folder)
-//				System.out.println(file.getName());
 				if (fileName.equals(file.getName())) {
-					fileExists = true;
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 	
-	private static void saveLoop() {
-		undoLoop();
-		saveExitLoop();
-		fileExists();
-		overwriteLoop();
-	}	
-	
 	private static void overwriteLoop() {
-		do { // outer loop (filename check loop)
-			if (fileExists) { // if filename entered is in file list
-				System.out.println("Overwrite " + fileName + "?"); // prompt user for input
-				boolean innerLoop = true; // inner loop repeat variable
-				do { // inner loop (overwrite loop)
-					String response = in.next(); // scanner String variable
-					if (response.equals("y")) { // overwrite file
-						savePicture(); // save
-						innerLoop = false; // exit inner loop (overwrite loop)
-						//									outerLoop = false; // exit outer loop (filename check loop)
-						//				    					stopLoop = true;
-					} else if (response.equals("n")) { // do not overwrite file
-						fileExists = false;
-						innerLoop = false; // exit inner loop (overwrite loop)
-						
-						saveLoop();	// save/undo/exit prompt
-						
-					} else {
-						System.out.println("Please enter 'y' or 'n'"); // input validation
-						// reprompt
-					}
-				} while (innerLoop);
-				// TODO - stop else if from running when overwriting file (should only fire on new filename)
-			} else if (fileName != "exit") {
-				savePicture(); // runs even if overwriting existing file?
+		System.out.println("Overwrite " + fileName + "?"); // prompt user for input
+		boolean loop = false;
+		String response = "";
+		do {
+			response = in.next(); // scanner String variable
+			loop = false;
+			switch(response) {
+			case "y":
+				savePicture();
+				in.close();	
+				System.exit(0);
+				break;
+
+			case "n":
+				break;
+
+			default:
+				System.out.println("Please enter 'y' or 'n'"); // input validation
+				response = "";
+				loop = true;
+				break;
 			}
-		} while (absFileName.isEmpty());
+		} while (loop);
+
+// TODO - stop else if from running when overwriting file (should only fire on new filename)
 	}
 	
 	private static void savePicture() {
