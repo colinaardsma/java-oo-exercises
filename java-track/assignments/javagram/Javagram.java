@@ -34,6 +34,10 @@ public class Javagram {
 			case "undo": // undo filter choice (revert to original image)
 				applyFilter(); // apply filter
 				break;
+				
+			case "filter":
+				applyFilterAgain(); // go back to filter menu and apply another filter
+				break;
 
 			case "exit": // exit
 				System.out.println("Image not saved");
@@ -99,6 +103,9 @@ public class Javagram {
 				System.out.println("3. Blue Filter");
 				System.out.println("4. Greyscale Filter");
 				System.out.println("5. Negative Filter");
+				System.out.println("6. Rotate CW");
+				System.out.println("7. Flip Horizontal");
+				System.out.println("8. Flip Vertical");
 
 				int filterChoice = in.nextInt();	
 
@@ -129,6 +136,12 @@ public class Javagram {
 			return new GreyscaleFilter();
 		} else if (i == 5) {
 			return new NegativeFilter();
+		} else if (i == 6) {
+			return new RotateFilter();
+		} else if (i == 7) {
+			return new FlipHorFilter();
+		} else if (i == 8) {
+			return new FlipVerFilter();
 		}
 		return null;
 	}
@@ -144,11 +157,24 @@ public class Javagram {
 		System.out.println("Image successfully filtered");
 	}
 
+	private static void applyFilterAgain() {
+		// TODO - prompt user for filter and validate input		
+		filter = displayFilterMenu(in);
+
+		// filter and display image
+		processed = filter.process(processed);
+		processed.show();
+
+		System.out.println("Image successfully filtered");
+	}
+
+	
 	private static String saveUndoExitMenu() {
 		// save image, if desired
 		System.out.println("Save image to (relative to " + dir + ")");
 		System.out.println("Type 'exit' to quit w/o saving");
-		System.out.println("Type 'undo' to undo filter:");
+		System.out.println("Type 'undo' to undo filter");
+		System.out.println("Type 'filter' to return to filter menu and apply another filter:");
 
 		fileName = in.next();
 		return fileName;
