@@ -1,19 +1,27 @@
 package Blogz;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class User {
+public class User extends Entity{
 	
 	private String username;
 	private String password;
 	private static ArrayList<User> userList = new ArrayList<User>();
 
 	public User(String username, String password) {
-		// TODO Auto-generated constructor stub
-		if (isValidUsername(username)) {
-			this.username = username;
-		}
+		super();
+		Scanner in = new Scanner(System.in);
+		do{
+			if (isValidUsername(username)) {
+				this.username = username;
+			} else {
+				System.out.println("Invalid username, must be 4-11 characters using letters, numbers, - and _\nPlease enter a valid username: ");
+				this.username = in.next();
+			}
+		} while (this.username == null);
+		in.close();
 		this.password = User.hashPassword(password);
 		User.userList.add(this);
 	}
@@ -57,7 +65,24 @@ public class User {
 	}
 	
 	public static ArrayList<User> getUserList() {
+		System.out.println(userList);
 		return userList;
 	}
+	
+//	public static void main(String args[]) {
+//		User u = new User("mememe", "Pass1234");
+//		User u2 = new User("mememe", "Pass1234");
+//		User u3 = new User("mememe", "Pass1234");
+//		User u4 = new User("mememe", "Pass1234");
+//		User u5 = new User("mememe", "Pass1234");
+//		User u6 = new User("mememe", "Pass1234");
+//		System.out.println(u.getUID());
+//		System.out.println(u2.getUID());
+//		System.out.println(u3.getUID());
+//		System.out.println(u4.getUID());
+//		System.out.println(u5.getUID());
+//		System.out.println(u6.getUID());
+//		System.out.println(u2.getUID());
+//	}
 	
 }

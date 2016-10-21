@@ -3,7 +3,7 @@ package Blogz;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Post {
+public class Post extends Entity{
 	private String title;
 	private String body;
 	private final Date created;
@@ -11,6 +11,7 @@ public class Post {
 	private static ArrayList<Post> postList = new ArrayList<Post>();
 
 	public Post(String title, String body) {
+		super();
 		// TODO Auto-generated constructor stub
 		this.title = title;
 		this.body = body;
@@ -56,6 +57,24 @@ public class Post {
 	}
 	
 	public static ArrayList<Post> getPostList() {
+		System.out.println(postList);
 		return postList;
 	}
+	
+//	public static void main(String args[]) {
+//		Post p = new Post("hello","body");
+//		Post p2 = new Post("hello","body");
+//		Post p3 = new Post("hello","body");
+//		Post p4 = new Post("hello","body");
+//		Post p5 = new Post("hello","body");
+//		Post p6 = new Post("hello","body");
+//		Post p7 = new Post("hello","body");
+//		System.out.println(p.getUID());
+//		System.out.println(p2.getUID());
+//		System.out.println(p3.getUID());
+//		System.out.println(p4.getUID());
+//		System.out.println(p5.getUID());
+//		System.out.println(p6.getUID());
+//		System.out.println(p2.getUID());
+//	}
 }
