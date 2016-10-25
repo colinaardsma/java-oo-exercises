@@ -1,6 +1,7 @@
 package Blogz;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Entity {
 	private final int uid;
@@ -13,6 +14,30 @@ public abstract class Entity {
 	
 	public int getUID() {
 		return this.uid;
+	}
+	
+	public static ArrayList<Entity> getEntityList() {
+//		System.out.println(entityList);
+		return entityList;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		
+		if (o == null) {
+			return false;
+		}
+		
+		if (this.getClass() != o.getClass()) {
+			return false;
+		}
+		
+		Entity entity = (Entity) o;
+		
+		return Objects.equals(this.uid, entity.uid);
 	}
 	
 }

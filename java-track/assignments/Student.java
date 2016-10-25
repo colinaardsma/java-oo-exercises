@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.Objects;
 
 public class Student {
 
@@ -91,6 +92,25 @@ public class Student {
 	
 	public String toString() {
 		return this.fName + " " + this.lName + " has a Student ID of " + this.sID + ", a " + this.gpa + " GPA, and " + this.credits + " credits";
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		
+		if (o == null) {
+			return false;
+		}
+		
+		if (this.getClass() != o.getClass()) {
+			return false;
+		}
+		
+		Student student = (Student) o;
+		
+		return Objects.equals(this.getName(), student.getName()) && Objects.equals(this.getClassStanding(), student.getClassStanding()) && Objects.equals(this.getCredits(), student.getCredits()) && Objects.equals(this.getStudentID(), student.getStudentID());
 	}
 	
 	public static void main(String[] args) {

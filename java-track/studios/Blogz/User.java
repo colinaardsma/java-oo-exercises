@@ -12,16 +12,16 @@ public class User extends Entity{
 
 	public User(String username, String password) {
 		super();
-		Scanner in = new Scanner(System.in);
-		do{
+//		Scanner in = new Scanner(System.in);
+//		do{
 			if (isValidUsername(username)) {
 				this.username = username;
-			} else {
-				System.out.println("Invalid username, must be 4-11 characters using letters, numbers, - and _\nPlease enter a valid username: ");
-				this.username = in.next();
+//			} else {
+//				System.out.println("Invalid username, must be 4-11 characters using letters, numbers, - and _\nPlease enter a valid username: ");
+//				this.username = in.next();
 			}
-		} while (this.username == null);
-		in.close();
+//		} while (this.username == null);
+//		in.close();
 		this.password = User.hashPassword(password);
 		User.userList.add(this);
 	}
@@ -65,7 +65,7 @@ public class User extends Entity{
 	}
 	
 	public static ArrayList<User> getUserList() {
-		System.out.println(userList);
+//		System.out.println(userList);
 		return userList;
 	}
 	

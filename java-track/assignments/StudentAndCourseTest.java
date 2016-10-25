@@ -251,5 +251,18 @@ public class StudentAndCourseTest extends TestCase {
 //		System.out.println(Course.getAllCourses());
 		assertTrue("Courses do not list properly.", Course.getAllCourses().equals(coursesTest));
 	}
+	
+	@Test
+	public void testStudentEquals() {
+		Student s = new Student("carl", "young", 1234);
+		Student s1 = new Student("carl", "young", 1234);
+		Student s2 = new Student("carl", "young", 1234);
+		Student s3 = new Student("karl", "old", 12345);
+		assertTrue(s.equals(s2));
+		assertTrue(s2.equals(s));
+		assertTrue(s1.equals(s));
+		assertFalse(s2.equals(s3));
+		assertFalse(s3.equals(s2));
+	}
 
 }

@@ -57,7 +57,7 @@ public class Post extends Entity{
 	}
 	
 	public static ArrayList<Post> getPostList() {
-		System.out.println(postList);
+//		System.out.println(postList);
 		return postList;
 	}
 	
