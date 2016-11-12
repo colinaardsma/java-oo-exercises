@@ -12,7 +12,7 @@ public class Post extends Entity{
 
 	public Post(String title, String body) {
 		super();
-		// TODO Auto-generated constructor stub
+
 		this.title = title;
 		this.body = body;
 		this.created = new Date();
