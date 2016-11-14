@@ -109,7 +109,7 @@ public class Javagram {
 
 				int filterChoice = in.nextInt();	
 
-				// TODO - pass filter ID int to getFilter, and get an instance of Filter back 
+				// pass filter ID int to getFilter, and get an instance of Filter back 
 				filter = getFilter(filterChoice);
 				if (filter == null) { 
 					throw new NullPointerException();
@@ -121,11 +121,9 @@ public class Javagram {
 		return filter;
 	}
 
-	// TODO - refactor this method to accept an int parameter, and return an instance of the Filter interface
-	// TODO - refactor this method to thrown an exception if the int doesn't correspond to a filter
 	private static Filter getFilter(int i) {
 
-		// TODO - create some more filters, and add logic to return the appropriate one
+		// create some more filters, and add logic to return the appropriate one
 		if(i == 1) {
 			return new RedFilter();
 		} else if(i == 2) {
@@ -147,7 +145,7 @@ public class Javagram {
 	}
 
 	private static void applyFilter() {
-		// TODO - prompt user for filter and validate input		
+		// prompt user for filter and validate input		
 		filter = displayFilterMenu(in);
 
 		// filter and display image
@@ -158,7 +156,7 @@ public class Javagram {
 	}
 
 	private static void applyFilterAgain() {
-		// TODO - prompt user for filter and validate input		
+		// prompt user for filter and validate input		
 		filter = displayFilterMenu(in);
 
 		// filter and display image
@@ -219,7 +217,6 @@ public class Javagram {
 			}
 		} while (loop);
 
-// TODO - stop else if from running when overwriting file (should only fire on new filename)
 	}
 	
 	private static void savePicture() {
